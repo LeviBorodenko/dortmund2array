@@ -1,6 +1,6 @@
 ## dortmund2array
 
-Tool to convert datasets from [_Benchmark Data Sets for Graph Kernels(K. Kersting et al., 2016)_](http://graphkernels.cs.tu-dortmund.de) into a format suitable for deep learning research in graph classification.
+Tool to convert datasets from [_Benchmark Data Sets for Graph Kernels (K. Kersting et al., 2016)_](http://graphkernels.cs.tu-dortmund.de) into a format suitable for deep learning research in graph classification.
 
 <hr>
 
@@ -27,23 +27,19 @@ The graph signal is an array of shape `(nodes, features)` where the features are
 Simply get the `dortmund2array` command line tool via `pip install dortmund2array`.
 
 ```
-usage: primify[-h][--image IMAGE_PATH][--max_digits MAX_DIGITS]
-    [--method {0, 1, 2}][--output_dir OUTPUT_DIR]
-    [--output_file OUTPUT_FILE][-v]
+usage: dortmund2array [-h] [--version] [--output OUTPUT_FOLDER]
+                      [--input INPUT_FOLDER]
 
-Command - line tool for converting images to primes
+Tool to convert datasets from 'Benchmark Data Sets for Graph Kernels' (K.
+Kersting et al., 2016)
 
 optional arguments:
-    -h, --help            show this help message and exit
-    --image IMAGE_PATH    Source image to be converted.
-    --max_digits MAX_DIGITS
-        Maximal number of digits the prime can have.
-    --method {0, 1, 2}      Method for converting image. Tweak 'till happy
-    --output_dir OUTPUT_DIR
-        Directory of the output text file
-    --output_file OUTPUT_FILE
-        File name of the text file containing the prime.
-    -v                    Verbose output(Recommended!)
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --output OUTPUT_FOLDER, -o OUTPUT_FOLDER
+                        Output folder.
+  --input INPUT_FOLDER, -i INPUT_FOLDER
+                        Input folder containing the dataset of the same name.
 ```
 
 Thus, download and unzip a dataset. Make sure the folder-name agrees with the dataset-name on the files inside of it. If you for instance download `MUTAG` and the corresponding folder is `.\MUTAG\` and you want the array data saved in `.\MUTAG_array\` then you need to simply run:
