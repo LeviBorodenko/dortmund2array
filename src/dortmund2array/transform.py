@@ -18,15 +18,19 @@ class BenchmarkData(object):
     Arguments:
         raw_path (Path): Path to dataset
         clean_path (Path): Path where to store the transformed data.
+        return_edgelist (bool): If true, will return edge list instead
+        of adjacency
 
     """
 
-    def __init__(self, raw_path: Path, clean_path: Path):
+    def __init__(self, raw_path: Path, clean_path: Path, return_edgelist: bool = False):
         super(BenchmarkData, self).__init__()
 
         # save paths
         self.raw_path = Path(raw_path)
         self.clean_path = Path(clean_path)
+
+        self.return_edgelist = return_edgelist
 
         # Name of Folder that contains the data.
         # This is also the name of the dataset.
@@ -191,18 +195,23 @@ class BenchmarkData(object):
                 self.graph_id += 1
                 self.smallest_node = largest_node
 
-                # get adjacency
-                adjacency_matrix = nx.to_numpy_matrix(G)
-
-                if adjacency_matrix.shape[-1] != graph_features.shape[-2]:
+                if len(G) != graph_features.shape[-2]:
 
                     raise ValueError(f"Graph {self.graph_id - 1} is corrupted.")
 
-                return {
-                    "adjacency": adjacency_matrix,
-                    "graph_signal": graph_features,
-                    "label": graph_label,
-                }
+                if self.return_edgelist:
+                    return {
+                        "edges": G.edges(),
+                        "graph_signal": graph_features,
+                        "label": graph_label,
+                    }
+                else:
+
+                    return {
+                        "adjacency": nx.to_numpy_matrix(G),
+                        "graph_signal": graph_features,
+                        "label": graph_label,
+                    }
         else:
 
             # We reached end without breaking
@@ -251,15 +260,3 @@ class BenchmarkData(object):
         self.preporcess()
 
         self.save_data()
-
-
-if __name__ == "__main__":
-    data = BenchmarkData("./NCI1/", "./clean/")
-    data.run()
-
-    with open("./clean/NCI1.pickle", "rb") as f:
-        data = pickle.load(f)
-
-        for i in data:
-            print(i)
-            break

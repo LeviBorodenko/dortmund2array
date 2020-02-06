@@ -49,6 +49,13 @@ def parse_args(args):
         dest="input_folder",
     )
 
+    parser.add_argument(
+        "-e",
+        action="store_true",
+        dest="return_edgelist",
+        help="Return edge list instead of adjacency.",
+    )
+
     return parser.parse_args(args)
 
 
@@ -61,7 +68,9 @@ def main(args):
     args = parse_args(args)
 
     data_instance = BenchmarkData(
-        raw_path=args.input_folder, clean_path=args.output_folder
+        raw_path=args.input_folder,
+        clean_path=args.output_folder,
+        return_edgelist=args.return_edgelist,
     )
 
     print("Transforming data... This could take a while.")

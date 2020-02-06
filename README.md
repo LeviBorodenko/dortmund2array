@@ -40,6 +40,8 @@ optional arguments:
                         Output folder.
   --input INPUT_FOLDER, -i INPUT_FOLDER
                         Input folder containing the dataset of the same name.
+  -e                    Output edge list instead of adjacency for each
+                        graph.
 ```
 
 Thus, download and unzip a dataset. Make sure the folder-name agrees with the dataset-name on the files inside of it. If you for instance download `MUTAG` and the corresponding folder is `.\MUTAG\` and you want the array data saved in `.\MUTAG_array\` then you need to simply run:
